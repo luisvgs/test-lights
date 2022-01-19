@@ -1,65 +1,49 @@
-import React, { Suspense, createRef, useRef, useEffect } from "react";
-import * as THREE from "three";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import React, { useState, Suspense, useRef, useEffect } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
   PerspectiveCamera,
-  // useHelper,
-  // Environment,
   Stars,
+  Stats,
+  Html,
   OrbitControls,
-  TransformControls,
 } from "@react-three/drei";
 import "./App.scss";
-import Phone from "./models/Phone";
-// import { SpotLightHelper } from "three";
-// import { useSpring, a } from "@react-spring/three";
-// import { a as web } from "@react-spring/web";
+import state from "./state";
+// import Phone from "./models/Phone";
+import Telefono from "./models/Telefono";
+import Dinosaur from "./models/Dino";
+import { Block } from "./block";
 
-// const Lights = () => {
-//   const light = useRef();
-//   // useHelper(light, SpotLightHelper, "cyan");
-//   return (
-//     <group>
-//       <ambientLight />
-//       <spotLight ref={light} position={[50, 40, 40]} castShadow />
-//     </group>
-//   );
-// };
-function ScrollContainer({ scroll, children }) {
-  const { viewport } = useThree();
-  const group = useRef();
-  useFrame((state, delta) => {
-    group.current.position.y = THREE.MathUtils.damp(
-      group.current.position.y,
-      viewport.height * scroll.current,
-      4,
-      delta
-    );
-    // Or: group.current.position.lerp(vec.set(0, viewport.height * scroll.current, 0), 0.1)
-  });
-  return <group ref={group}>{children}</group>;
-}
-
-const Cube = () => {
+const Cube = (props) => {
+  // This reference will give us direct access to the mesh
+  const mesh = useRef();
+  // Set up state for the hovered and active state
+  const [hovered, setHover] = useState(false);
+  const [active, setActive] = useState(false);
+  // Subscribe this component to the render-loop, rotate the mesh every frame
+  useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
+  // Return view, these are regular three.js elements expressed in JSX
   return (
-    <mesh position={[5, -15, 2]}>
-      <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-      <meshNormalMaterial attach="material" color="pink" />
+    <mesh
+      position={[5, -19, 2]}
+      ref={mesh}
+      scale={active ? 1.5 : 1}
+      onClick={(event) => setActive(!active)}
+      onPointerOver={(event) => setHover(true)}
+      onPointerOut={(event) => setHover(false)}
+    >
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
     </mesh>
   );
 };
-
 const App = () => {
-  const scrollRef = useRef();
-  const scroll = useRef(0);
+  const scrollArea = useRef();
+  const onScroll = (e) => (state.top.current = e.target.scrollTop);
+  useEffect(() => void onScroll({ target: scrollArea.current }), []);
   return (
     <>
-      <Canvas
-        onCreated={(state) => state.events.connect(scrollRef.current)}
-        colorManagement
-        shadows
-        dpr={[1, 2]}
-      >
+      <Canvas colorManagement shadows dpr={[1, 2]}>
         <fog attach="fog" args={["#272730", 16, 30]} />
         <ambientLight intensity={0.75} />
         <PerspectiveCamera makeDefault position={[0, 0, 9]} fov={75}>
@@ -75,25 +59,18 @@ const App = () => {
           />
         </PerspectiveCamera>
         <Suspense fallback={null}>
-          <ScrollContainer scroll={scroll}>
-            <Phone castShadow />
-            <Cube />
-          </ScrollContainer>
+          <Block factor={1.5} offset={0}>
+            <Telefono castShadow />
+            <Cube castShadow />
+            <Dinosaur castShadow />
+          </Block>
         </Suspense>
-        <OrbitControls enablePan={false} enableZoom={true} />
-        <Stars radius={400} depth={50} count={700} factor={10} />
-        <TransformControls />
+        <OrbitControls enablePan={false} enableZoom={false} />
+        <Stars radius={400} depth={50} count={900} factor={10} />
+        <Stats />
       </Canvas>
-      <div
-        ref={scrollRef}
-        onScroll={(e) =>
-          (scroll.current =
-            e.target.scrollTop /
-            (e.target.scrollHeight - e.target.clientHeight))
-        }
-        className="scroll"
-      >
-        <div style={{ height: `200vh`, pointerEvents: "none" }}></div>
+      <div className="scrollArea" ref={scrollArea} onScroll={onScroll}>
+        <div style={{ height: `${state.pages * 100}vh` }} />
       </div>
       <div className="layer" />
     </>

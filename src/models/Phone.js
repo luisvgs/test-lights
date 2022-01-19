@@ -15,7 +15,7 @@ const Phone = (props) => {
 
   const { nodes } = useGLTF(PhoneModel);
   return (
-    <group position={[5, -9, 2]} scale={12}>
+    <group position={[5, -4, 2]} scale={12}>
       <a.mesh
         ref={group}
         onClick={() => setExpand(!expand)}

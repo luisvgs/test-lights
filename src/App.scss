@@ -14,6 +14,14 @@ canvas,
   padding: 0;
 }
 
+div.label {
+  background-color: white;
+  border: 1px solid #888888;
+  padding: 5px;
+  border-radius: 3px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .layer {
   position: absolute;
   bottom: 0;
@@ -43,12 +51,11 @@ body {
     #070710 100%
   );
 }
-
-.scroll {
+.scrollArea {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
-  overflow-y: auto;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
 }
