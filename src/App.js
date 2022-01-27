@@ -4,7 +4,6 @@ import {
   PerspectiveCamera,
   Stars,
   Stats,
-  Html,
   OrbitControls,
 } from "@react-three/drei";
 import "./App.scss";
