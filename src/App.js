@@ -1,79 +1,93 @@
-import React, { useState, Suspense, useRef, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import React, { useRef, Suspense } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { SpotLightHelper } from "three";
 import {
   PerspectiveCamera,
-  Stars,
-  Stats,
   OrbitControls,
+  ScrollControls,
+  useHelper,
+  Scroll,
 } from "@react-three/drei";
 import "./App.scss";
-import state from "./state";
-// import Phone from "./models/Phone";
-import Telefono from "./models/Telefono";
-import Dinosaur from "./models/Dino";
-import { Block } from "./block";
+import * as THREE from "three";
+import UnoModel from "./components/UnoModel";
+import Header from "./components/Header";
+import Lights from "./components/Lights";
 
-const Cube = (props) => {
-  // This reference will give us direct access to the mesh
-  const mesh = useRef();
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
-  // Return view, these are regular three.js elements expressed in JSX
+const Rig = () => {
+  const { camera, mouse } = useThree();
+  const vec = new THREE.Vector3();
+  return useFrame(() =>
+    camera.position.lerp(
+      vec.set(mouse.x * 0.6, mouse.y * 0.6, camera.position.z),
+      0.008
+    )
+  );
+};
+
+const Plane = () => {
   return (
-    <mesh
-      position={[5, -19, 2]}
-      ref={mesh}
-      scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
+    <mesh position={[0, 0.0, -0.68]} receiveShadow scale={[20.4, 30.3, 0.98]}>
+      <planeBufferGeometry />
+      <meshStandardMaterial attach="material" color="#090981" />
     </mesh>
   );
 };
+const Floor = () => {
+  return (
+    <mesh
+      position={[1.548, 0.0, -4.923]}
+      receiveShadow
+      scale={[20.4, 30.3, 0.98]}
+    >
+      <planeBufferGeometry />
+      <meshStandardMaterial attach="material" color="#090981" />
+    </mesh>
+  );
+};
+
+const SecondLight = () => {
+  const light = useRef();
+  useHelper(light, SpotLightHelper, "red");
+  return (
+    <group>
+      <spotLight
+        castShadow
+        intensity={0.4}
+        color={"blue"}
+        penumbra={1.0}
+        ref={light}
+        position={[-1.111, -0.232, 7.864]}
+      />
+    </group>
+  );
+};
+
 const App = () => {
-  const scrollArea = useRef();
-  const onScroll = (e) => (state.top.current = e.target.scrollTop);
-  useEffect(() => void onScroll({ target: scrollArea.current }), []);
   return (
     <>
-      <Canvas colorManagement shadows dpr={[1, 2]}>
-        <fog attach="fog" args={["#272730", 16, 30]} />
-        <ambientLight intensity={0.75} />
-        <PerspectiveCamera makeDefault position={[0, 0, 9]} fov={75}>
-          <pointLight intensity={1} position={[-10, -25, -10]} />
-          <spotLight
-            castShadow
-            intensity={2.25}
-            angle={0.2}
-            penumbra={1}
-            position={[-25, 20, -15]}
-            shadow-mapSize={[1024, 1024]}
-            shadow-bias={-0.0001}
-          />
-        </PerspectiveCamera>
+      <Header />
+      <Canvas concurrent shadows pixelRatio={1.25}>
+        <fog attach="fog" args={["#272730", 0.1, 30]} />
+        <ambientLight color={"purple"} intensity={0.4} />
+        <SecondLight />
+        <Lights />
         <Suspense fallback={null}>
-          <Block factor={1.5} offset={0}>
-            <Telefono castShadow />
-            <Cube castShadow />
-            <Dinosaur castShadow />
-          </Block>
+          <PerspectiveCamera fov={50} position={[0.111, -0.732, 1.864]}>
+            <ScrollControls damping={1} pages={1}>
+              <Scroll>
+                <UnoModel />
+                <Plane />
+                <Floor />
+              </Scroll>
+            </ScrollControls>
+          </PerspectiveCamera>
         </Suspense>
-        <OrbitControls enablePan={false} enableZoom={false} />
-        <Stars radius={400} depth={50} count={900} factor={10} />
-        <Stats />
+        <Rig />
+        <OrbitControls />
       </Canvas>
-      <div className="scrollArea" ref={scrollArea} onScroll={onScroll}>
-        <div style={{ height: `${state.pages * 100}vh` }} />
-      </div>
       <div className="layer" />
     </>
   );
 };
-
 export default App;
