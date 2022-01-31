@@ -1,14 +1,7 @@
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import "./Header.css";
 const Header = () => {
-  return (
-    <header>
-      <div className="logo">
-        <span>Testing maldita sea</span>
-      </div>
-      <div className="episode">
-        <span>SiteOne test</span>
-      </div>
-    </header>
-  );
+  return <div class="sidenav"></div>;
 };
-
 export default Header;
