@@ -14,7 +14,6 @@ const Lights = () => {
         distance={9.64}
         angle={0.6}
         penumbra={1}
-        // position={[-0.402, -0.127, 6.204]}
         position={[1.0, -0.127, 6.204]}
       />
     </group>
