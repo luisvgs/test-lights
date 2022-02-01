@@ -6,8 +6,8 @@ const SupportLights = () => {
   const group = useRef();
   const pointLight = useRef();
   const light = useRef();
-  useHelper(light, SpotLightHelper, "lightblue");
-  useHelper(pointLight, PointLightHelper, 0.2, "hotpink");
+  // useHelper(light, SpotLightHelper, "lightblue");
+  // useHelper(pointLight, PointLightHelper, 0.2, "hotpink");
   return (
     <group ref={group}>
       <pointLight
@@ -15,14 +15,14 @@ const SupportLights = () => {
         castShadow
         ref={pointLight}
         distance={6}
-        intensity={4}
-        position={[-0.2, -0.393, 4.303]}
+        intensity={8}
+        position={[-0.52, -0.493, 4.703]}
       />
       <pointLight
         // Light from top
         castShadow
-        intensity={0.9}
-        position={[0.205, 2.6, 3.05]}
+        intensity={1.9}
+        position={[0.205, 1.6, 3.05]}
       />
       <spotLight
         castShadow

@@ -4,7 +4,7 @@ import { useHelper } from "@react-three/drei";
 
 const Lights = () => {
   const light = useRef();
-  useHelper(light, SpotLightHelper, "cyan");
+  // useHelper(light, SpotLightHelper, "cyan");
   return (
     <group>
       <spotLight
@@ -15,6 +15,7 @@ const Lights = () => {
         angle={0.6}
         penumbra={1}
         position={[1.0, -0.127, 6.204]}
+        shadow-camera-bottom={-10}
       />
     </group>
   );
