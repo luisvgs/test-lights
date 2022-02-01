@@ -3,40 +3,74 @@ import { Canvas } from "@react-three/fiber";
 import {
   PerspectiveCamera,
   OrbitControls,
+  Environment,
   ScrollControls,
   Scroll,
 } from "@react-three/drei";
 import "./App.scss";
 import UnoModel from "./components/UnoModel";
-import Header from "./components/Header";
 import SideBar from "./components/SideBar";
+import Fireflies from "./components/Fireflies";
 import Lights from "./components/Lights";
 import Rig from "./rig";
 import Plane from "./components/Plane";
 import SupportLights from "./components/SupportLight";
+import { EffectComposer, SSAO, Bloom } from "@react-three/postprocessing";
 
 const App = () => {
   return (
     <>
-      <Header />
       <SideBar />
-      <Canvas concurrent shadows pixelRatio={1.25}>
-        <fog attach="fog" args={["#272730", 0.1, 30]} />
+      <Canvas
+        dpr={[1, 1.5]}
+        shadows
+        gl={{ stencil: true, depth: false, alpha: false, antialias: false }}
+      >
+        <fog attach="fog" args={["red", 50, 60]} />
+        <color attach="background" args={["#17171b"]} />
+
         <ambientLight color={"purple"} intensity={0.4} />
         <Lights />
         <SupportLights />
         <Suspense fallback={null}>
-          <PerspectiveCamera fov={50} position={[0.111, -0.732, 1.864]}>
+          <PerspectiveCamera fov={10} position={[0.111, -0.932, 2.001]}>
             <ScrollControls damping={1} pages={1}>
               <Scroll>
                 <UnoModel />
+                <Fireflies count={30} />
                 <Plane />
               </Scroll>
             </ScrollControls>
           </PerspectiveCamera>
+          <Environment preset="city" />
         </Suspense>
         <Rig />
         <OrbitControls />
+        {/*}
+        <EffectComposer multisampling={0}>
+          <SSAO
+            samples={11}
+            radius={30}
+            intensity={20}
+            luminanceInfluence={0.6}
+            color="red"
+          />
+          <SSAO
+            samples={21}
+            radius={7}
+            intensity={20}
+            luminanceInfluence={0.6}
+            color="red"
+          />
+          <Bloom
+            intensity={1.25}
+            kernelSize={2}
+            luminanceThreshold={0.8}
+            luminanceSmoothing={0.0}
+          />
+        </EffectComposer>
+
+        */}
       </Canvas>
       <div className="layer" />
     </>
