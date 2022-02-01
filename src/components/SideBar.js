@@ -1,54 +1,13 @@
-import "./SideBar.css";
+import "../App.scss";
 const SideBar = () => {
   return (
-    <nav id="menu">
-      <ul>
-        <li>
-          <a href="http://">Home</a>
-        </li>
-        <li>
-          <a class="dropdown-arrow" href="http://">
-            Products
-          </a>
-          <ul class="sub-menus">
-            <li>
-              <a href="http://">Products Sub Menu 1</a>
-            </li>
-            <li>
-              <a href="http://">Products Sub Menu 2</a>
-            </li>
-            <li>
-              <a href="http://">Products Sub Menu 3</a>
-            </li>
-            <li>
-              <a href="http://">Products Sub Menu 4</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="http://">About</a>
-        </li>
-        <li>
-          <a class="dropdown-arrow" href="http://">
-            Services
-          </a>
-          <ul class="sub-menus">
-            <li>
-              <a href="http://">Services Sub Menu 1</a>
-            </li>
-            <li>
-              <a href="http://">Services Sub Menu 2</a>
-            </li>
-            <li>
-              <a href="http://">Services Sub Menu 3</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="http://">Contact Us</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="sidebar">
+      <h1>Site One</h1>
+      <a href="">Partners</a>
+      <a href="">Portfolio</a>
+      <a href="">News</a>
+      <a href="">Contact</a>
+    </div>
   );
 };
 
