@@ -1,8 +1,10 @@
 import "../App.scss";
+import Logo from "./logo.png";
+
 const SideBar = () => {
   return (
     <div class="sidebar">
-      <h1> Site One</h1>
+      <img class="logo" src={Logo} />
       <a id="about" href="">
         About us
       </a>
