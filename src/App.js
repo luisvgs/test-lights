@@ -5,6 +5,7 @@ import {
   OrbitControls,
   Environment,
   ScrollControls,
+  softShadows,
   Scroll,
 } from "@react-three/drei";
 import "./App.scss";
@@ -16,6 +17,8 @@ import Rig from "./rig";
 import Plane from "./components/Plane";
 import SupportLights from "./components/SupportLight";
 import { EffectComposer, SSAO, Bloom } from "@react-three/postprocessing";
+
+softShadows();
 
 const App = () => {
   return (
@@ -56,24 +59,22 @@ const App = () => {
         </Suspense>
         <Rig />
         {/* <OrbitControls enableZoom={false} /> */}
-        {/*
-    
+
         <EffectComposer multisampling={0}>
           <SSAO
-            samples={11}
-            radius={30}
-            intensity={20}
+            samples={25}
+            radius={20}
+            intensity={10}
             luminanceInfluence={0.6}
             color="red"
           />
           <Bloom
-            intensity={1.25}
+            intensity={0.52}
             kernelSize={2}
-            luminanceThreshold={0.8}
-            luminanceSmoothing={0.0}
+            luminanceThreshold={0.7}
+            luminanceSmoothing={0.3}
           />
         </EffectComposer>
-    */}
       </Canvas>
       <div className="layer" />
     </>
