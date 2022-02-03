@@ -10,7 +10,7 @@ import {
 import "./App.scss";
 import UnoModel from "./components/UnoModel";
 import SideBar from "./components/SideBar";
-import Fireflies from "./components/Fireflies";
+// import Fireflies from "./components/Fireflies";
 import Lights from "./components/Lights";
 import Rig from "./rig";
 import Plane from "./components/Plane";
@@ -20,11 +20,22 @@ import { EffectComposer, SSAO, Bloom } from "@react-three/postprocessing";
 const App = () => {
   return (
     <>
+      <div className="text-background">
+        <h1 class>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        </h1>
+      </div>
       <SideBar />
       <Canvas
         dpr={[1, 1.5]}
         shadows
-        gl={{ stencil: true, depth: false, alpha: false, antialias: false }}
+        gl={{
+          physicallyCorrectLights: true,
+          stencil: true,
+          depth: false,
+          alpha: false,
+          antialias: false,
+        }}
       >
         <fog attach="fog" args={["red", 50, 60]} />
         <color attach="background" args={["#17171b"]} />
@@ -37,7 +48,6 @@ const App = () => {
             <ScrollControls damping={1} pages={1}>
               <Scroll>
                 <UnoModel />
-                <Fireflies count={30} />
                 <Plane />
               </Scroll>
             </ScrollControls>
@@ -46,18 +56,12 @@ const App = () => {
         </Suspense>
         <Rig />
         <OrbitControls />
-        {/*}
+        {/*
+    
         <EffectComposer multisampling={0}>
           <SSAO
             samples={11}
             radius={30}
-            intensity={20}
-            luminanceInfluence={0.6}
-            color="red"
-          />
-          <SSAO
-            samples={21}
-            radius={7}
             intensity={20}
             luminanceInfluence={0.6}
             color="red"
@@ -69,8 +73,7 @@ const App = () => {
             luminanceSmoothing={0.0}
           />
         </EffectComposer>
-
-        */}
+    */}
       </Canvas>
       <div className="layer" />
     </>
