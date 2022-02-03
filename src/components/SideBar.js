@@ -8,10 +8,10 @@ const SideBar = () => {
       <a id="about" href="">
         About us
       </a>
-      <a id="partners" href="">
+      <a id="partners" href="/">
         Partners
       </a>
-      <a id="portfolio" href="">
+      <a id="portfolio" href="/">
         Portfolio
       </a>
       <a id="news" href="">
