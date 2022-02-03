@@ -1,7 +1,10 @@
 import { DoubleSide } from "three";
-import { MeshReflectorMaterial } from "@react-three/drei";
-
+import { useLoader } from "@react-three/fiber";
+import WallTexture from "./Background.png";
+import { MeshReflectorMaterial, useTexture } from "@react-three/drei";
+import { TextureLoader } from "three/src/loaders/TextureLoader";
 const Plane = () => {
+  const colorMap = useLoader(TextureLoader, WallTexture);
   return (
     <group>
       {/* Walls */}
@@ -12,7 +15,11 @@ const Plane = () => {
         scale={[20.4, 30.3, 0.98]}
       >
         <planeBufferGeometry />
-        <meshStandardMaterial attach="material" color="#090981" />
+        <meshStandardMaterial
+          attach="material"
+          color="#090981"
+          map={colorMap}
+        />
       </mesh>
       {/* Floor */}
       <mesh
