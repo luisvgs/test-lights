@@ -55,7 +55,7 @@ const App = () => {
           <Environment preset="city" />
         </Suspense>
         <Rig />
-        <OrbitControls />
+        {/* <OrbitControls enableZoom={false} /> */}
         {/*
     
         <EffectComposer multisampling={0}>
