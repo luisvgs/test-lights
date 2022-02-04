@@ -59,22 +59,6 @@ const App = () => {
         </Suspense>
         <Rig />
         {/* <OrbitControls enableZoom={false} /> */}
-
-        <EffectComposer multisampling={0}>
-          <SSAO
-            samples={25}
-            radius={20}
-            intensity={10}
-            luminanceInfluence={0.6}
-            color="red"
-          />
-          <Bloom
-            intensity={0.52}
-            kernelSize={2}
-            luminanceThreshold={0.7}
-            luminanceSmoothing={0.3}
-          />
-        </EffectComposer>
       </Canvas>
       <div className="layer" />
     </>
