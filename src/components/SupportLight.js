@@ -1,8 +1,23 @@
 import React, { useRef } from "react";
 import { useHelper } from "@react-three/drei";
 import { PointLightHelper, SpotLightHelper } from "three";
+import { useControls } from "leva";
 
 const SupportLights = () => {
+  // const { intensity, topLight } = useControls({
+  //   intensity: {
+  //     min: 8.0,
+  //     max: 13.0,
+  //     value: 0.5,
+  //     step: 0.1,
+  //   },
+  //   topIntensity: {
+  //     min: 1.9,
+  //     max: 13.0,
+  //     value: 0.5,
+  //     step: 0.1,
+  //   },
+  // });
   const group = useRef();
   const pointLight = useRef();
   const light = useRef();
@@ -15,7 +30,7 @@ const SupportLights = () => {
         castShadow
         ref={pointLight}
         distance={6}
-        intensity={8}
+        intensity={8.0}
         position={[-0.52, -0.493, 4.703]}
       />
       <pointLight
