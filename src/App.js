@@ -1,20 +1,22 @@
+import React, { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
 import {
-  Environment,
   PerspectiveCamera,
-  Scroll,
+  OrbitControls,
+  Environment,
   ScrollControls,
   softShadows,
+  Scroll,
 } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import React, { Suspense } from "react";
 import "./App.scss";
+import UnoModel from "./components/UnoModel";
+import SideBar from "./components/SideBar";
 // import Fireflies from "./components/Fireflies";
 import Lights from "./components/Lights";
-import Plane from "./components/Plane";
-import SideBar from "./components/SideBar";
-import SupportLights from "./components/SupportLight";
-import UnoModel from "./components/UnoModel";
 import Rig from "./rig";
+import Plane from "./components/Plane";
+import SupportLights from "./components/SupportLight";
+import { EffectComposer, SSAO, Bloom } from "@react-three/postprocessing";
 
 softShadows();
 
@@ -27,7 +29,17 @@ const App = () => {
         </h1>
       </div>
       <SideBar />
-      <Canvas dpr={[1, 1.5]} shadows>
+      <Canvas
+        dpr={[1, 1.5]}
+        shadows
+        gl={{
+          physicallyCorrectLights: true,
+          stencil: true,
+          depth: false,
+          alpha: false,
+          antialias: false,
+        }}
+      >
         <fog attach="fog" args={["red", 50, 60]} />
         <color attach="background" args={["#17171b"]} />
 
