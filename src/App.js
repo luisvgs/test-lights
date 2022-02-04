@@ -23,44 +23,42 @@ softShadows();
 const App = () => {
   return (
     <>
-      <div className="text-background">
-        <h1 class>
-          <p>Lorem ipsum dolor sit amet</p>
-        </h1>
-      </div>
-      <SideBar />
-      <Canvas
-        dpr={[1, 1.5]}
-        shadows
-        gl={{
-          physicallyCorrectLights: true,
-          stencil: true,
-          depth: false,
-          alpha: false,
-          antialias: false,
-        }}
-      >
-        <fog attach="fog" args={["red", 50, 60]} />
-        <color attach="background" args={["#17171b"]} />
+      <Suspense fallback={<p>Loading..</p>}>
+        <div className="text-background">
+          <h1 class>
+            <p>Lorem ipsum dolor sit amet</p>
+          </h1>
+        </div>
+        <SideBar />
+        <Canvas
+          dpr={[1, 1.5]}
+          shadows
+          gl={{
+            physicallyCorrectLights: true,
+          }}
+        >
+          <fog attach="fog" args={["red", 50, 60]} />
+          <color attach="background" args={["#17171b"]} />
 
-        <ambientLight color={"purple"} intensity={0.4} />
-        <Lights />
-        <SupportLights />
-        <Suspense fallback={null}>
-          <PerspectiveCamera fov={3} position={[0.111, -0.932, 2.251]}>
-            <ScrollControls damping={1} pages={1}>
-              <Scroll>
-                <UnoModel />
-                <Plane />
-              </Scroll>
-            </ScrollControls>
-          </PerspectiveCamera>
-          <Environment preset="city" />
-        </Suspense>
-        <Rig />
-        {/* <OrbitControls enableZoom={false} /> */}
-      </Canvas>
-      <div className="layer" />
+          <ambientLight color={"purple"} intensity={0.4} />
+          <Lights />
+          <SupportLights />
+          <Suspense fallback={null}>
+            <PerspectiveCamera fov={3} position={[0.111, -0.932, 2.251]}>
+              <ScrollControls damping={1} pages={1}>
+                <Scroll>
+                  <UnoModel />
+                  <Plane />
+                </Scroll>
+              </ScrollControls>
+            </PerspectiveCamera>
+            <Environment preset="city" />
+          </Suspense>
+          <Rig />
+          {/* <OrbitControls enableZoom={false} /> */}
+        </Canvas>
+        <div className="layer" />
+      </Suspense>
     </>
   );
 };
