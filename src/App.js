@@ -47,7 +47,7 @@ const App = () => {
         <Lights />
         <SupportLights />
         <Suspense fallback={null}>
-          <PerspectiveCamera fov={10} position={[0.111, -0.932, 2.251]}>
+          <PerspectiveCamera fov={3} position={[0.111, -0.932, 2.251]}>
             <ScrollControls damping={1} pages={1}>
               <Scroll>
                 <UnoModel />

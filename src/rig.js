@@ -6,7 +6,7 @@ const Rig = () => {
   const vec = new THREE.Vector3();
   return useFrame(() =>
     camera.position.lerp(
-      vec.set(mouse.x * 0.3, mouse.y * 0.3, camera.position.z),
+      vec.set(mouse.x * 0.132, mouse.y * 0.145, camera.position.z),
       0.011
     )
   );
