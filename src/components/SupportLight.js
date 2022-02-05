@@ -26,22 +26,21 @@ const SupportLights = () => {
   return (
     <group ref={group}>
       <pointLight
-        color={"#f20723"} // Red light from corner
         castShadow
+        color={"#f20723"} // Red light from corner
         ref={pointLight}
         distance={6}
-        intensity={8.0}
+        intensity={6.003}
         position={[-0.52, -0.493, 4.703]}
+        power={63}
       />
       <pointLight
         // Light from top
-        castShadow
         intensity={1.9}
         position={[0.205, 1.6, 3.05]}
       />
       <spotLight
-        castShadow
-        intensity={0.1}
+        intensity={0.87}
         color={"blue"}
         penumbra={1.0}
         ref={light}

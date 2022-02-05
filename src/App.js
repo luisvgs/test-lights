@@ -40,7 +40,7 @@ const App = () => {
           <fog attach="fog" args={["red", 50, 60]} />
           <color attach="background" args={["#17171b"]} />
 
-          <ambientLight color={"purple"} intensity={0.4} />
+          <ambientLight color={"purple"} intensity={3.7} />
           <Lights />
           <SupportLights />
           <Suspense fallback={null}>
