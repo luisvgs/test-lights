@@ -1,5 +1,5 @@
 import "../App.scss";
-import Logo from "./white_logo.png";
+import Logo from "../img/white_logo.png";
 
 const SideBar = () => {
   return (

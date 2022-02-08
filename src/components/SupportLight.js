@@ -26,7 +26,6 @@ const SupportLights = () => {
   return (
     <group ref={group}>
       <pointLight
-        castShadow
         color={"#f20723"} // Red light from corner
         ref={pointLight}
         distance={6}

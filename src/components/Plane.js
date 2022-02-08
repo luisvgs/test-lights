@@ -1,6 +1,6 @@
 import { DoubleSide } from "three";
 import { useLoader } from "@react-three/fiber";
-import WallTexture from "./Background.png";
+import WallTexture from "../img/Background.png";
 import { MeshReflectorMaterial, useTexture } from "@react-three/drei";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 const Plane = () => {
