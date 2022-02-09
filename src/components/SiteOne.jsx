@@ -6,12 +6,14 @@ import { useFrame } from "@react-three/fiber";
 const SuComponent = (props) => {
   const group = useRef();
   const { nodes, materials } = useGLTF(SuModel);
-  useFrame(() => (group.current.rotation.y += 0.005));
+  useFrame(() => (group.current.rotation.y += 0.009));
   return (
     <group
       ref={group}
-      scale={[1, 1, 1]}
-      position={[0.205, 0.78, 2]}
+      scale={[4, 4, 1]}
+      castShadow
+      receiveShadow
+      position={[3.405, 0.88, 2]}
       {...props}
       dispose={null}
     >
