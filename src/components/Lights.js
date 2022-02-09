@@ -9,10 +9,12 @@ const Lights = () => {
     <group>
       <spotLight
         ref={light}
-        intensity={0.93}
-        power={5.566}
+        castShadow
+        intensity={2.852}
+        power={11.666}
         distance={9.64}
-        angle={0.6}
+        angle={0.57}
+        decay={0.34}
         color="#ffffff"
         penumbra={1}
         position={[1.0, -0.127, 6.204]}

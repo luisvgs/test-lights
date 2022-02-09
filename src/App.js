@@ -47,7 +47,7 @@ const App = () => {
           >
             <ScrollControls
               infinite={false}
-              damping={1}
+              damping={0.5}
               pages={2}
               horizontal={true}
             >
@@ -55,13 +55,37 @@ const App = () => {
                 <Text
                   position={[-0.471, 1.2, 2]}
                   scale={[1, 1, 0]}
-                  fontSize={0.080}
+                  fontSize={0.08}
                   color="white"
-    maxWidth={0.69}
+                  maxWidth={0.69}
                   anchorX="center"
                   anchorY="middle"
                 >
                   Lorem ipsum dolor sit amet
+                </Text>
+                <Text
+                  position={[2.730, 1.20, 2]}
+                  scale={[1, 1, 0]}
+                  fontSize={0.08}
+                  color="white"
+                  maxWidth={0.69}
+                  anchorX="center"
+                  anchorY="middle"
+                >
+                  Lorem ipsum dolor sit amet
+                </Text>
+                <Text
+                  position={[2.730, 1.04, 2]}
+                  scale={[1, 1, 0]}
+                  fontSize={0.03}
+                  color="white"
+                  maxWidth={0.69}
+                  anchorX="center"
+                  anchorY="middle"
+                >
+    Lorem ipsum dolor sit amet, consectetuer adipiscing
+elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+
                 </Text>
                 <UnoComponent />
                 <SuComponent />

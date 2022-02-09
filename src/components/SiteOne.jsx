@@ -10,7 +10,7 @@ const SuComponent = (props) => {
   return (
     <group
       ref={group}
-      scale={[4, 4, 1]}
+      scale={[3, 3, 1]}
       castShadow
       receiveShadow
       position={[3.405, 0.88, 2]}
