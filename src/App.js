@@ -9,7 +9,8 @@ import {
   Scroll,
 } from "@react-three/drei";
 import "./App.scss";
-import UnoModel from "./components/UnoModel";
+import UnoComponent from "./components/UnoModel";
+import SuComponent from "./components/SiteOne";
 import SideBar from "./components/SideBar";
 // import Fireflies from "./components/Fireflies";
 import Lights from "./components/Lights";
@@ -18,7 +19,7 @@ import Plane from "./components/Plane";
 import SupportLights from "./components/SupportLight";
 import { EffectComposer, SSAO, Bloom } from "@react-three/postprocessing";
 
-softShadows();
+// softShadows();
 
 const App = () => {
   return (
@@ -47,7 +48,7 @@ const App = () => {
             <PerspectiveCamera fov={3} position={[0.111, -0.932, 2.251]}>
               <ScrollControls damping={1} pages={2} horizontal={true}>
                 <Scroll>
-                  <UnoModel />
+                  <UnoComponent />
                   <Plane />
                 </Scroll>
               </ScrollControls>
